@@ -3,9 +3,9 @@
 
 #include "driver/gpio.h"
 
-//int LedR = 32;
-//int LedA = 26;
-//int LedV = 25;
+gpio_int_type_t LedR = 32;
+gpio_int_type_t = 26;
+gpio_int_type_t = 25;
 
 //void configurarLed(int LedR, int LedA, int LedV);
 void configurarLed(gpio_int_type_t ledR, gpio_int_type_t ledA, gpio_int_type_t ledV); //especifica en que pines conectar cada led: ROJO, AMARILLO, VERDE
