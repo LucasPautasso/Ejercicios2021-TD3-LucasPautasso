@@ -3,7 +3,7 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include <driver/adc.h>
-//#include <driver/dac.h>
+#include <driver/dac.h>
 #include "../driver/include/driver/gpio.h"
 
 #define N_LED  3
@@ -22,7 +22,7 @@ void app_main()
 	    gpio_set_direction(led[i], GPIO_MODE_OUTPUT);
     }
     
-    //dac_output_enable(DAC_CHANNEL_1);
+    dac_output_enable(DAC_CHANNEL_2);
 
     while(true)
     {
@@ -57,8 +57,8 @@ void app_main()
             gpio_set_level (led[2], 0);
         }
 
-
-        //dac_output_voltage(DAC_CHANNEL_1,(lectura*255/4095));     //0 y 255 DAC -- 8 bit -- va de 0 V a VDA (pin de alimentacion analogico) 
+        // Control de brillo
+        dac_output_voltage(DAC_CHANNEL_2,(lectura*255/4095));     //0 y 255 DAC -- 8 bit -- va de 0 V a VDA (pin de alimentacion analogico) 
                                                                     //0 y 4095 ADC
 
         //int lectura2 = 0;
