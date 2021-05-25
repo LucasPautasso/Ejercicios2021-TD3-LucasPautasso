@@ -69,7 +69,6 @@ void app_main()
 		}
 		vTaskDelay(T_ON);	
 	}
-   return 0;
 }
 
 
