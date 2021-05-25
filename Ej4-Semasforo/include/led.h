@@ -1,14 +1,16 @@
 #ifndef LED_H //chequea que otro archivo no llame a led.h
 #define LED_H
 
-#include "driver/gpio.h"
+#include "driver/gpio.h"    // se incluye para utilizar las funciones de la librería gpio
 
-gpio_int_type_t LedR = 32;
-gpio_int_type_t = 26;
-gpio_int_type_t = 25;
+// DEFINICIÓN DE PINES DE LA PLACA PARA CADA COLOR DE LED
+#define LED_VERDE GPIO_NUM_25       //LED VERDE     --> PIN 25
+#define LED_AMARILLO GPIO_NUM_33    //LED AMARILLO  --> PIN 33
+#define LED_ROJO GPIO_NUM_32        //LED ROJO      --> PIN 32
 
-//void configurarLed(int LedR, int LedA, int LedV);
-void configurarLed(gpio_int_type_t ledR, gpio_int_type_t ledA, gpio_int_type_t ledV); //especifica en que pines conectar cada led: ROJO, AMARILLO, VERDE
+
+// DECLARACÍON DE FUNCIONES
+void configurarLed(gpio_int_type_t ledR, gpio_int_type_t ledA, gpio_int_type_t ledV);
 
 void prenderLed(char led);
 

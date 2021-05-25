@@ -3,10 +3,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define LED_VERDE GPIO_NUM_25
-#define LED_AMARILLO GPIO_NUM_26
-#define LED_ROJO GPIO_NUM_27
-
 #define T_VERDE		300
 #define T_AMARILLO	100
 #define T_ROJO		500
