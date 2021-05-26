@@ -4,7 +4,15 @@
 #include "../include/semaforo.h"
 #include "../include/led.h"
 
+// DEFINICIÓN DE PINES DE LA PLACA PARA CADA COLOR DE LED
+#define LED_VERDE GPIO_NUM_25       //LED VERDE     --> PIN 25
+#define LED_AMARILLO GPIO_NUM_33    //LED AMARILLO  --> PIN 33
+#define LED_ROJO GPIO_NUM_32        //LED ROJO      --> PIN 32
 
+// DEFINICIÓN DE TIEMPOS DE ESTADOS
+#define T_ROJO 1000
+#define T_AMARILLO 200
+#define T_VERDE 1000
 
 // Tipo de datos para la variable de estados
 typedef enum{
@@ -21,10 +29,9 @@ int contador;
 // Función Inicializar MEF
 void InicializarSemaforo(void)
 {
-    
+    configurarLed(LED_ROJO, LED_AMARILLO, LED_VERDE);
 	estadoActual = ROJO;
     contador = 0;
-    // Resto de la inicializacion
 }
 
 
@@ -41,7 +48,7 @@ void ActualizarSemaforo(void)
             apagarLed('A');
             apagarLed('V');
     		// Chequear condiciones de transición de estado
-			if(contador == 1000){
+			if(contador == T_ROJO){
 				// Cambiar a otro estado
 				 estadoActual = ROJO_AMARILLO;
                  contador = 0;
@@ -57,7 +64,7 @@ void ActualizarSemaforo(void)
             prenderLed('A');
             apagarLed('V');
     		// Chequear condiciones de transición de estado
-			if(contador == 200){
+			if(contador == T_AMARILLO){
 				// Cambiar a otro estado
 				 estadoActual = VERDE;
                  contador = 0;
@@ -73,7 +80,7 @@ void ActualizarSemaforo(void)
             apagarLed('A');
             prenderLed('V');
     		// Chequear condiciones de transición de estado
-			if(contador == 1000){
+			if(contador == T_VERDE){
 				// Cambiar a otro estado
 				 estadoActual = AMARILLO;
                  contador = 0;
@@ -89,7 +96,7 @@ void ActualizarSemaforo(void)
             prenderLed('A');
             apagarLed('V');
     		// Chequear condiciones de transición de estado
-			if(contador == 200){
+			if(contador == T_AMARILLO){
 				// Cambiar a otro estado
 				 estadoActual = ROJO;
                  contador = 0;

@@ -17,7 +17,6 @@ Fecha: 25/05/2021
 // Programa principal
 void app_main ()
 {
-    configurarLed(LED_ROJO, LED_AMARILLO, LED_VERDE);
 	InicializarSemaforo();
 
 	while(1)
