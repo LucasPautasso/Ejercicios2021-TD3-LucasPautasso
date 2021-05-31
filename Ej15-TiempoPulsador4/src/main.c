@@ -50,8 +50,8 @@ void tareaDestello( void* taskParmPtr )
     TickType_t dif;
 
     // ---------- Bucle infinito --------------------------
-    while( true )
-    //if ( estadoBoton == 1 )
+    //while( true )
+    if ( estadoBoton == 1 )
     {
         dif = obtenerDiferencia();
 
@@ -66,6 +66,6 @@ void tareaDestello( void* taskParmPtr )
         {
             vTaskDelay( T_ESPERA );
         }
-        //vTaskDelete( tareaDestello );
+        vTaskDelete( &taskParmPtr );
     }
 }
