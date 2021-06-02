@@ -1,8 +1,12 @@
-/*=============================================================================
- * Author: Lucas Danilo Pautasso <lucaspaut@gmail.com>
- * Date: 2021/04/19 
+/*
  *=============================================================================
-*/
+ * Author: Lucas Pautasso <lucaspaut@gmai.com>
+ * Date: 18/05/2021
+ *=============================================================================
+ */
+
+// Ejercicio Nº 1 TD3 - Secuencia Led
+
 
 #include "../driver/include/driver/gpio.h"
 #include "freertos/FreeRTOS.h"
@@ -16,6 +20,7 @@
 int led [N_LED] = {GPIO_NUM_25, GPIO_NUM_33, GPIO_NUM_32};	// Pines de conexión de los leds
 int pulsador [N_PULSADOR] = {GPIO_NUM_14, GPIO_NUM_27};		// Pines de conexión de los pulsadores
 
+
 void app_main()
 {
 	//Configuración
@@ -23,7 +28,7 @@ void app_main()
 		gpio_pad_select_gpio(led[i]);
 		gpio_set_direction(led[i], GPIO_MODE_OUTPUT);
 	}
-	
+
 	for(int i = 0; i < N_PULSADOR; i++){				// for para establecer cada pin de pulsador como entrada
 		gpio_pad_select_gpio(pulsador[i]);
 		gpio_set_direction(pulsador[i], GPIO_MODE_INPUT);
@@ -31,6 +36,7 @@ void app_main()
 	}
 
    int i = 0, sentido = 0;
+   
    //Bucle infinito
    while( true )
     {
@@ -47,7 +53,7 @@ void app_main()
 		{
 			gpio_set_level(led[i], 0);
 			i++;
-			if ( i > N_LED ){
+			if ( i >= N_LED ){
 				i = 0;
 			}
 			gpio_set_level(led[i], 1);
@@ -63,8 +69,8 @@ void app_main()
 		}
 		vTaskDelay(T_ON);	
 	}
-   return 0;
 }
+
 
 /*
 #define LED1 GPIO_NUM_32 //ver de crear un tipo de datos

@@ -20,14 +20,13 @@ void app_main()
     // Devuelve pdPASS si la tarea fue creada y agregada a la lista ready
     // En caso contrario devuelve pdFAIL.
     inicializarPulsador();
-    
 
     BaseType_t res = xTaskCreatePinnedToCore(
     	tareaDestello,                     	// Funcion de la tarea a ejecutar
         "tareaDestello",   	                // Nombre de la tarea como String amigable para el usuario
-        configMINIMAL_STACK_SIZE, 		    // Cantidad de stack de la tarea
-        NULL,                          	    // Parametros de tarea
-        tskIDLE_PRIORITY+1,         	    // Prioridad de la tarea -> Queremos que este un nivel encima de IDLE
+        configMINIMAL_STACK_SIZE, 		// Cantidad de stack de la tarea
+        NULL,                          	// Parametros de tarea
+        tskIDLE_PRIORITY+1,         	// Prioridad de la tarea -> Queremos que este un nivel encima de IDLE
         NULL,                          		// Puntero a la tarea creada en el sistema
         PROCESADORA
     );
@@ -36,7 +35,7 @@ void app_main()
 	if(res == pdFAIL)
 	{
 		printf( "Error al crear la tarea.\r\n" );
-		while(true);					    // si no pudo crear la tarea queda en un bucle infinito
+		while(true);					// si no pudo crear la tarea queda en un bucle infinito
 	}
 }
 
@@ -50,8 +49,7 @@ void tareaDestello( void* taskParmPtr )
     TickType_t dif;
 
     // ---------- Bucle infinito --------------------------
-    //while( true )
-    if ( estadoBoton == 1 )
+    while( true )
     {
         dif = obtenerDiferencia();
 
@@ -66,6 +64,6 @@ void tareaDestello( void* taskParmPtr )
         {
             vTaskDelay( T_ESPERA );
         }
-        vTaskDelete( &taskParmPtr );
+
     }
 }

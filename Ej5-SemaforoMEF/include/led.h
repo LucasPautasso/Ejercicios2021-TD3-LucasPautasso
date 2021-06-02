@@ -3,11 +3,6 @@
 
 #include "driver/gpio.h"    // se incluye para utilizar las funciones de la librería gpio
 
-gpio_int_type_t LedR = 32;
-gpio_int_type_t LedA = 26;
-gpio_int_type_t LedV = 25;
-
-
 // DECLARACÍON DE FUNCIONES
 void configurarLed(gpio_int_type_t ledR, gpio_int_type_t ledA, gpio_int_type_t ledV);
 
