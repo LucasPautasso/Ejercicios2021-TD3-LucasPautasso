@@ -3,10 +3,9 @@
 
 #include "driver/gpio.h"    // se incluye para utilizar las funciones de la librería gpio
 
-// DEFINICIÓN DE PINES DE LA PLACA PARA CADA COLOR DE LED
-#define LED_VERDE GPIO_NUM_25       //LED VERDE     --> PIN 25
-#define LED_AMARILLO GPIO_NUM_33    //LED AMARILLO  --> PIN 33
-#define LED_ROJO GPIO_NUM_32        //LED ROJO      --> PIN 32
+gpio_int_type_t LedR = 32;
+gpio_int_type_t LedA = 26;
+gpio_int_type_t LedV = 25;
 
 
 // DECLARACÍON DE FUNCIONES
