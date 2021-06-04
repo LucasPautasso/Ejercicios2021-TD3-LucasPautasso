@@ -1,9 +1,11 @@
 #ifndef PULSADOR_H_
 #define PULSADOR_H_
+
 /*==================[ Inclusiones ]============================================*/
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
+
 /*==================[ Definiciones ]===================================*/
 #define TIEMPO_NO_VALIDO   0
 
@@ -25,11 +27,12 @@ typedef struct
     TickType_t diferenciaTiempo;	    //variables
 } pulsadorInfo;
 
-int estadoBoton;
+
 
 /*==================[Prototipos de funciones]======================*/
 void inicializarPulsador( void );
 TickType_t obtenerDiferencia( void);
 void borrarDiferencia( void );
+int actualizarPulsador();
 
 #endif
