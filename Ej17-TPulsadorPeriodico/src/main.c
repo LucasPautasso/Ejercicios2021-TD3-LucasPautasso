@@ -48,22 +48,22 @@ void tareaDestello( void* taskParmPtr )
     TickType_t xPeriodicity =  PERIODO;			// Tarea periodica cada 1000 ms
 
     TickType_t xLastWakeTime = xTaskGetTickCount();
-    TickType_t duty = 0;
+    TickType_t tl_on = 0;
 
     // ---------- Bucle infinito --------------------------
     while( true )
     {
-        duty = obtenerDiferencia();
+        tl_on = obtenerDiferencia();
 
-       printf("El ancho de pulso es de %i \n", duty);
+       printf("El ancho de pulso es de %i \n", tl_on);
 
-        if ( duty > PERIODO_MS )
+        if ( tl_on > PERIODO_MS )
         {
-            duty = PERIODO_MS;
+            tl_on = PERIODO_MS;
         }
 
         gpio_set_level(SALIDA1, 1);
-        vTaskDelay ( duty );
+        vTaskDelay ( tl_on );
         gpio_set_level(SALIDA1, 0);
 
         // Envia la tarea al estado bloqueado durante xPeriodicity (delay periodico)
