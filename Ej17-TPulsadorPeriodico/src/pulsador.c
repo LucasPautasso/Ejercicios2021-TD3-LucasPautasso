@@ -152,9 +152,5 @@ void tareaPulsador( void* taskParmPtr )
     {
         actualizarPulsador();
         vTaskDelay( T_REBOTE );
-        if (actualizarPulsador() == DESCENDENTE)
-        {
-            void crearTareaDestello();
-        }
     }
 }

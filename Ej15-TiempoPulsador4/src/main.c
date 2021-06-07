@@ -13,45 +13,31 @@
 #define PROCESADORB 1
 
 void tareaDestello( void* taskParmPtr ); //Prototipo de la función de la tarea
+void crearTareaDestello( void );
+
+TaskHandle_t xHandle1 = NULL;
+
+
 
 void app_main()
 {
-    // Crear tarea en freeRTOS
-    // Devuelve pdPASS si la tarea fue creada y agregada a la lista ready
-    // En caso contrario devuelve pdFAIL.
     inicializarPulsador();
-    
-
-    BaseType_t res = xTaskCreatePinnedToCore(
-    	tareaDestello,                     	// Funcion de la tarea a ejecutar
-        "tareaDestello",   	                // Nombre de la tarea como String amigable para el usuario
-        configMINIMAL_STACK_SIZE, 		    // Cantidad de stack de la tarea
-        NULL,                          	    // Parametros de tarea
-        tskIDLE_PRIORITY+1,         	    // Prioridad de la tarea -> Queremos que este un nivel encima de IDLE
-        NULL,                          		// Puntero a la tarea creada en el sistema
-        PROCESADORA
-    );
-
-    // Gestion de errores
-	if(res == pdFAIL)
-	{
-		printf( "Error al crear la tarea.\r\n" );
-		while(true);					    // si no pudo crear la tarea queda en un bucle infinito
-	}
 }
+
+
 
 // Implementacion de funcion de la tarea
 void tareaDestello( void* taskParmPtr )
 {
-    // ---------- Congiguraciones ------------------------------
+    printf( "Se ejecuta la tarea destello\n" );
+    // ---------- Congiguraciones -------------------------
     gpio_pad_select_gpio(SALIDA1);
     gpio_set_direction(SALIDA1, GPIO_MODE_OUTPUT);
 
     TickType_t dif;
 
     // ---------- Bucle infinito --------------------------
-    //while( true )
-    if ( estadoBoton == 1 )
+    while( true )
     {
         dif = obtenerDiferencia();
 
@@ -61,11 +47,37 @@ void tareaDestello( void* taskParmPtr )
             vTaskDelay( dif );
             gpio_set_level( SALIDA1, 0 );
             borrarDiferencia();
+            printf ("Se borra la tarea destello\n");
+            vTaskDelete( xHandle1 );
         }
         else
         {
             vTaskDelay( T_ESPERA );
         }
-        vTaskDelete( &taskParmPtr );
+        
     }
+}
+
+
+
+void crearTareaDestello(void){
+     printf( "Tarea Destello creada\n" );
+    BaseType_t res = xTaskCreatePinnedToCore
+    (
+    	tareaDestello,                     	// Funcion de la tarea a ejecutar
+        "tareaDestello",   	                // Nombre de la tarea como String amigable para el usuario
+        configMINIMAL_STACK_SIZE*2, 		// Cantidad de stack de la tarea
+        NULL,                          	    // Parametros de tarea
+        tskIDLE_PRIORITY+1,         	    // Prioridad de la tarea -> Queremos que este un nivel encima de IDLE
+        xHandle1,                          	// Puntero a la tarea creada en el sistema
+        PROCESADORA
+    );
+   
+    // Gestion de errores
+	if(res == pdFAIL)
+	{
+		printf( "Error al crear la tarea.\r\n" );
+		while(true);					    // si no pudo crear la tarea queda en un bucle infinito
+	}
+
 }
