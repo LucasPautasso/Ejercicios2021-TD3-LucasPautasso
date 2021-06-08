@@ -11,7 +11,7 @@
 #define PERIODO     pdMS_TO_TICKS(PERIODO_MS)
 #define PROCESADORA 0
 #define PROCESADORB 1
-
+#define N_LED       1
 
 gpio_int_type_t led [N_LED] = {GPIO_NUM_25};
 

@@ -10,7 +10,7 @@
 /*==================[ Definiciones ]===================================*/
 #define TIEMPO_NO_VALIDO   0
 #define N_PULSADOR      1               //Cantidad de pulsadores
-#define N_LED       1
+
 
 
 typedef enum
